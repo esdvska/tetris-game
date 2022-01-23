@@ -1,0 +1,20 @@
+<div>
+  <h1>Welcome to TETRIS WORLD!</h1>
+  <form>
+    <input
+      type="text"
+      placeholder="user name"
+      [(ngModel)]="username"
+      name="username"
+      (ngModelChange)="onChange()"
+    />
+    <input
+      type="text"
+      placeholder="e-mail"
+      [(ngModel)]="mail"
+      name="mail"
+      (ngModelChange)="onChange()"
+    />
+    <button [disabled]="isDisabled" (click)="startGame()">START GAME</button>
+  </form>
+</div>
