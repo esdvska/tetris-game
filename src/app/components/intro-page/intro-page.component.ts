@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-intro-page',
@@ -7,27 +8,28 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class IntroPageComponent implements OnInit {
   @Output() isUserValid = new EventEmitter<string>();
+
   public username: string = '';
+
   public mail: string = '';
-  public isDisabled = true;
+
+  public isPersonInfoInvalid: boolean = false;
+
   constructor() {}
 
   ngOnInit(): void {}
-  public onChange() {
-    if (this.username && this.mail) {
-      this.isDisabled = false;
-      console.log(this.isDisabled);
-    }
+
+  public cleanWarning() {
+    this.isPersonInfoInvalid = false;
   }
-  public startGame() {
+
+  public onSubmit(form: FormGroup) {
+    this.username = form.value.username;
+    this.mail = form.value.mail;
     if (this.username.length >= 3 && this.mail.includes('@')) {
       this.isUserValid.emit(this.username);
     } else {
-      alert(
-        `Popraw dane użytkownika. 
-        - Nazwa użytkownika powinna zawierać przynajmniej 3 znaki. 
-        - Email musi zawierać '@'`
-      );
+      this.isPersonInfoInvalid = true;
     }
   }
 }

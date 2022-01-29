@@ -1,21 +1,65 @@
-<div>
-  <h1>{{ "Hello " + username }}</h1>
-  <button (click)="onReturnToHomePage()">Powrót do strony głównej</button>
-  <div>
-    <div>
-      <p>Ready</p>
-      <p>Started</p>
-
-      <p>Paused</p>
+<div class="game-card">
+  <div class="row flex-center">
+    <div class="sm-6 md-8 lg-10 col">
+      <h3>{{ "Hello " + username }}</h3>
     </div>
-    <tetris-core #game></tetris-core>
-
-    <button (click)="game.actionStart()">Start</button>
-    <button (click)="game.actionStop()">Stop</button>
-    <button (click)="game.actionReset()">Reset</button>
-    <button (click)="game.actionRotate()">Rotate</button>
-    <button (click)="game.actionLeft()">Left</button>
-    <button (click)="game.actionRight()">Right</button>
-    <button (click)="game.actionDown()">Down</button>
+    <div class="sm-6 md-4 lg-2 col" style="margin: auto">
+      <button (click)="onReturnToHomePage()">Exit game</button>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="scores">Your Scores:</label>
+    <input
+      disabled
+      [value]="points"
+      class="input-block"
+      type="range"
+      name="scores"
+      id="scores"
+      min="0"
+      max="100"
+      oninput="output.value = this.value"
+    />
+    <output id="output" for="scores">{{ points }}</output>
+  </div>
+  <div class="card">
+    <div class="row flex-center">
+      <div class="sm-6 col">
+        <tetris-core #game (lineCleared)="onLineCleared()"></tetris-core>
+      </div>
+      <div class="sm-6 col action-buttons">
+        <button
+          (click)="game.actionStart(); onGameStateChange(gameStates.Start)"
+        >
+          Start
+        </button>
+        <button (click)="game.actionStop(); onGameStateChange(gameStates.Stop)">
+          Stop
+        </button>
+        <button
+          (click)="game.actionReset(); onGameStateChange(gameStates.Reset)"
+        >
+          Reset
+        </button>
+        <button (click)="game.actionRotate()">Rotate</button>
+        <button (click)="game.actionLeft()">Left</button>
+        <button (click)="game.actionRight()">Right</button>
+        <button (click)="game.actionDown()">Down</button>
+        <div class="row flex-center">
+          <div class="sm-6 col">
+            <h4>{{ "Game " + gameStatus }}</h4>
+          </div>
+          <div class="sm-6 col" style="margin: auto; text-align: center">
+            <div class="paper-switch-tile-card border">
+              <div
+                class="paper-switch-tile-card-front border background-secondary"
+              >
+                {{ seconds + " sec" }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
