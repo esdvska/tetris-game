@@ -1,9 +1,11 @@
-<app-intro-page
-  (isUserValid)="onUserValidation($event)"
-  *ngIf="!isUserValid"
-></app-intro-page>
-<app-game-page
-  *ngIf="isUserValid"
-  [username]="username"
-  (return)="onReturn()"
-></app-game-page>
+<div class="dark app-container">
+  <app-intro-page
+    (isUserValid)="onUserValidation($event)"
+    *ngIf="!isUserValid"
+  ></app-intro-page>
+  <app-game-page
+    *ngIf="isUserValid"
+    [username]="username"
+    (return)="onReturn()"
+  ></app-game-page>
+</div>
