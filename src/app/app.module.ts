@@ -6,9 +6,15 @@ import { IntroPageComponent } from './components/intro-page/intro-page.component
 import { GamePageComponent } from './components/game-page/game-page.component';
 import { FormsModule } from '@angular/forms';
 import { TetrisCoreModule } from 'ngx-tetris';
+import { GameHistoryTableComponent } from './components/game-page/game-history-table/game-history-table.component';
 
 @NgModule({
-  declarations: [AppComponent, IntroPageComponent, GamePageComponent],
+  declarations: [
+    AppComponent,
+    IntroPageComponent,
+    GamePageComponent,
+    GameHistoryTableComponent,
+  ],
   imports: [BrowserModule, FormsModule, TetrisCoreModule],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,10 +1,33 @@
 <div class="game-card">
+  //game header
   <div class="row flex-center">
-    <div class="sm-6 md-8 lg-10 col">
+    <div class="sm-6 md-8 lg-8 col">
       <h3>{{ "Hello " + username }}</h3>
     </div>
-    <div class="sm-6 md-4 lg-2 col" style="margin: auto">
-      <button (click)="onReturnToHomePage()">Exit game</button>
+    <div class="sm-6 md-4 lg-4 col" style="margin: auto">
+      <label class="paper-btn btn-secondary" for="modal-1"
+        >Open My Game History</label
+      >
+      <input class="modal-state" id="modal-1" type="checkbox" />
+      <div class="modal">
+        <label class="modal-bg" for="modal-1"></label>
+        <div class="modal-body">
+          <label class="btn-close" for="modal-1">X</label>
+          <h4 class="modal-title">Game History</h4>
+          <h5 class="modal-subtitle"></h5>
+          <p class="modal-text">
+            <app-game-history-table
+              [history]="gameHistory"
+            ></app-game-history-table>
+          </p>
+          <button class="btn-success">
+            <label for="modal-1">Nice!</label>
+          </button>
+        </div>
+      </div>
+      <button class="btn-secondary" (click)="onReturnToHomePage()">
+        Exit game
+      </button>
     </div>
   </div>
   <div class="form-group">
@@ -25,7 +48,10 @@
   <div class="card">
     <div class="row flex-center">
       <div class="sm-6 col">
-        <tetris-core #game (lineCleared)="onLineCleared()"></tetris-core>
+        <tetris-core
+          #game
+          (lineCleared)="onLineCleared(); pushLineClearedToHistory()"
+        ></tetris-core>
       </div>
       <div class="sm-6 col action-buttons">
         <button

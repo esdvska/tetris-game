@@ -8,12 +8,15 @@ import {
   ElementRef,
 } from '@angular/core';
 
+import GameHistory from 'src/app/shared/model/gameHistory';
+
 enum GameStates {
   Start = 'Started',
   Stop = 'Stopped',
   Reset = 'Reset',
   Ready = 'Ready',
 }
+
 @Component({
   selector: 'app-game-page',
   templateUrl: './game-page.component.html',
@@ -25,6 +28,8 @@ export class GamePageComponent implements OnInit {
   @Input() public username: string = '';
 
   @Output() public return = new EventEmitter();
+
+  public gameHistory: GameHistory[] = [];
 
   public gameStates = GameStates;
 
@@ -51,6 +56,7 @@ export class GamePageComponent implements OnInit {
   }
 
   public onGameStateChange(gameState: GameStates) {
+    this.gameHistory.push({ timestamp: new Date(), actionType: gameState });
     if (gameState === GameStates.Reset) {
       if (
         this.gameStatus === GameStates.Start ||
@@ -64,6 +70,12 @@ export class GamePageComponent implements OnInit {
     } else {
       this.gameStatus = gameState;
     }
+  }
+  pushLineClearedToHistory() {
+    this.gameHistory.push({
+      timestamp: new Date(),
+      actionType: 'Line Cleared',
+    });
   }
 
   public onLineCleared() {
