@@ -15,6 +15,8 @@ enum GameStates {
   Stop = 'Stopped',
   Reset = 'Reset',
   Ready = 'Ready',
+  Clear = 'Cleared',
+  AllActions = 'All',
 }
 
 @Component({
@@ -26,14 +28,12 @@ export class GamePageComponent implements OnInit {
   @ViewChild('actionsBtnGroup') actionsBtnGroup: ElementRef | undefined;
 
   @Input() public username: string = '';
-
   @Output() public return = new EventEmitter();
 
   public gameHistory: GameHistory[] = [];
 
-  public gameStates = GameStates;
-
-  public gameStatus: GameStates = this.gameStates.Ready;
+  public gameStates = Object.values(GameStates);
+  public gameStatus = GameStates.Ready;
 
   public points: number = 0;
 
@@ -41,11 +41,14 @@ export class GamePageComponent implements OnInit {
 
   public isEndGameModalVisible: boolean = false;
 
+  public selectedAction = GameStates.AllActions;
+
   constructor() {}
 
   ngOnInit(): void {
+    console.log(this.gameStates);
     setInterval(() => {
-      if (this.gameStatus === this.gameStates.Start) {
+      if (this.gameStatus === GameStates.Start) {
         ++this.seconds;
       }
     }, 1000);
@@ -80,5 +83,9 @@ export class GamePageComponent implements OnInit {
 
   public onLineCleared() {
     ++this.points;
+  }
+
+  public onSelectionChange(event: Event) {
+    console.log(event);
   }
 }

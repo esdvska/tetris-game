@@ -7,7 +7,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let action of history">
-      <td>{{ action.timestamp | date }}</td>
+      <td>{{ action.timestamp | date | date: "MMM d, y, h:mm:ss a" }}</td>
       <td>Game {{ action.actionType }}</td>
     </tr>
   </tbody>

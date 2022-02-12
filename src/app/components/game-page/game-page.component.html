@@ -14,7 +14,15 @@
         <div class="modal-body">
           <label class="btn-close" for="modal-1">X</label>
           <h4 class="modal-title">Game History</h4>
-          <h5 class="modal-subtitle"></h5>
+          <select [(ngModel)]="selectedAction">
+            <option
+              *ngFor="let action of gameStates"
+              [value]="action"
+              [selected]="true"
+            >
+              {{ action }}
+            </option>
+          </select>
           <p class="modal-text">
             <app-game-history-table
               [history]="gameHistory"
@@ -54,17 +62,13 @@
         ></tetris-core>
       </div>
       <div class="sm-6 col action-buttons">
-        <button
-          (click)="game.actionStart(); onGameStateChange(gameStates.Start)"
-        >
+        <button (click)="game.actionStart(); onGameStateChange(gameStates[0])">
           Start
         </button>
-        <button (click)="game.actionStop(); onGameStateChange(gameStates.Stop)">
+        <button (click)="game.actionStop(); onGameStateChange(gameStates[1])">
           Stop
         </button>
-        <button
-          (click)="game.actionReset(); onGameStateChange(gameStates.Reset)"
-        >
+        <button (click)="game.actionReset(); onGameStateChange(gameStates[2])">
           Reset
         </button>
         <button (click)="game.actionRotate()">Rotate</button>
