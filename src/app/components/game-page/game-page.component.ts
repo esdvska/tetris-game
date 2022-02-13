@@ -7,6 +7,7 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
+import * as moment from 'moment';
 
 import GameHistory from 'src/app/shared/model/gameHistory';
 
@@ -59,7 +60,10 @@ export class GamePageComponent implements OnInit {
   }
 
   public onGameStateChange(gameState: GameStates) {
-    this.gameHistory.push({ timestamp: new Date(), actionType: gameState });
+    this.gameHistory.push({
+      timestamp: moment(new Date()),
+      actionType: gameState,
+    });
     if (gameState === GameStates.Reset) {
       if (
         this.gameStatus === GameStates.Start ||
@@ -76,7 +80,7 @@ export class GamePageComponent implements OnInit {
   }
   pushLineClearedToHistory() {
     this.gameHistory.push({
-      timestamp: new Date(),
+      timestamp: moment(),
       actionType: 'Line Cleared',
     });
   }

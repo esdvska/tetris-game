@@ -1,4 +1,6 @@
+import { Moment } from 'moment';
+
 export default interface GameHistory {
-  timestamp: Date;
+  timestamp: Moment;
   actionType: string;
 }

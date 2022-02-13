@@ -7,6 +7,8 @@ import { GamePageComponent } from './components/game-page/game-page.component';
 import { FormsModule } from '@angular/forms';
 import { TetrisCoreModule } from 'ngx-tetris';
 import { GameHistoryTableComponent } from './components/game-page/game-history-table/game-history-table.component';
+import { SortPipe } from './shared/model/pipes/sort.pipe';
+import { FilterPipe } from './shared/model/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { GameHistoryTableComponent } from './components/game-page/game-history-t
     IntroPageComponent,
     GamePageComponent,
     GameHistoryTableComponent,
+    SortPipe,
+    FilterPipe,
   ],
   imports: [BrowserModule, FormsModule, TetrisCoreModule],
   providers: [],

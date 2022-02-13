@@ -1,14 +1,20 @@
 <table class="table-hover">
   <thead>
     <tr>
-      <th>Date</th>
       <th>Action</th>
+      <th>
+        Date
+
+        <i class="bi bi-arrow-down" (click)="changeDirToAsc()"></i>
+
+        <i class="bi bi-arrow-up" (click)="changeDirToDesc()"></i>
+      </th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let action of history">
-      <td>{{ action.timestamp | date | date: "MMM d, y, h:mm:ss a" }}</td>
+    <tr *ngFor="let action of history | filter: selectedAction | sort: dir">
       <td>Game {{ action.actionType }}</td>
+      <td>{{ action.timestamp.format("MMMM Do YYYY, h:mm:ss a") }}</td>
     </tr>
   </tbody>
 </table>

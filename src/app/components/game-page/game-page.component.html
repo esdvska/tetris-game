@@ -1,5 +1,4 @@
 <div class="game-card">
-  //game header
   <div class="row flex-center">
     <div class="sm-6 md-8 lg-8 col">
       <h3>{{ "Hello " + username }}</h3>
@@ -14,6 +13,7 @@
         <div class="modal-body">
           <label class="btn-close" for="modal-1">X</label>
           <h4 class="modal-title">Game History</h4>
+          <h5 class="modal-subtitle">Sort</h5>
           <select [(ngModel)]="selectedAction">
             <option
               *ngFor="let action of gameStates"
@@ -26,6 +26,7 @@
           <p class="modal-text">
             <app-game-history-table
               [history]="gameHistory"
+              [selectedAction]="selectedAction"
             ></app-game-history-table>
           </p>
           <button class="btn-success">
@@ -79,7 +80,7 @@
           <div class="sm-6 col">
             <h4>{{ "Game " + gameStatus }}</h4>
           </div>
-          <div class="sm-6 col" style="margin: auto; text-align: center">
+          <div class="sm-6 col text-center m-auto">
             <div class="paper-switch-tile-card border">
               <div
                 class="paper-switch-tile-card-front border background-secondary"
