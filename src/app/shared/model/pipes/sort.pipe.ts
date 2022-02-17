@@ -1,7 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Action } from 'rxjs/internal/scheduler/Action';
 import GameHistory from '../gameHistory';
-import { orderBy } from 'lodash';
 
 @Pipe({
   name: 'sort',

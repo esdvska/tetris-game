@@ -19,8 +19,9 @@
               *ngFor="let action of gameStates"
               [value]="action"
               [selected]="true"
+              style="color: black"
             >
-              {{ action }}
+              {{ action !== "Ready" ? action : null }}
             </option>
           </select>
           <p class="modal-text">

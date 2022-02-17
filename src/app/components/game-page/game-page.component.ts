@@ -15,9 +15,9 @@ enum GameStates {
   Start = 'Started',
   Stop = 'Stopped',
   Reset = 'Reset',
-  Ready = 'Ready',
   Clear = 'Cleared',
   AllActions = 'All',
+  Ready = 'Ready',
 }
 
 @Component({
@@ -29,11 +29,13 @@ export class GamePageComponent implements OnInit {
   @ViewChild('actionsBtnGroup') actionsBtnGroup: ElementRef | undefined;
 
   @Input() public username: string = '';
+
   @Output() public return = new EventEmitter();
 
   public gameHistory: GameHistory[] = [];
 
   public gameStates = Object.values(GameStates);
+
   public gameStatus = GameStates.Ready;
 
   public points: number = 0;
