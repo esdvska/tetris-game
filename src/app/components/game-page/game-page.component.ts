@@ -49,7 +49,6 @@ export class GamePageComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.gameStates);
     setInterval(() => {
       if (this.gameStatus === GameStates.Start) {
         ++this.seconds;
@@ -83,15 +82,11 @@ export class GamePageComponent implements OnInit {
   pushLineClearedToHistory() {
     this.gameHistory.push({
       timestamp: moment(),
-      actionType: 'Line Cleared',
+      actionType: GameStates.Clear,
     });
   }
 
   public onLineCleared() {
     ++this.points;
-  }
-
-  public onSelectionChange(event: Event) {
-    console.log(event);
   }
 }

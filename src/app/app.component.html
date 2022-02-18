@@ -1,6 +1,6 @@
 <div class="dark app-container">
   <app-intro-page
-    (isUserValid)="onUserValidation($event)"
+    (takeValidUserToGamePage)="onTakeValidUSerToGamePage($event)"
     *ngIf="!isUserValid"
   ></app-intro-page>
   <app-game-page

@@ -16,12 +16,4 @@ export class GameHistoryTableComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  public changeDirToDesc() {
-    this.dir = 'desc';
-  }
-
-  public changeDirToAsc() {
-    this.dir = 'asc';
-  }
 }

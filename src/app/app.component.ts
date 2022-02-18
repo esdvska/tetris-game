@@ -14,7 +14,7 @@ export class AppComponent {
 
   constructor() {}
 
-  public onUserValidation(username: string) {
+  public onTakeValidUSerToGamePage(username: string) {
     this.isUserValid = true;
     this.username = username;
   }

@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./intro-page.component.scss'],
 })
 export class IntroPageComponent implements OnInit {
-  @Output() isUserValid = new EventEmitter<string>();
+  @Output() takeValidUserToGamePage = new EventEmitter<string>();
 
   public username: string = '';
 
@@ -27,7 +27,7 @@ export class IntroPageComponent implements OnInit {
     this.username = form.value.username;
     this.mail = form.value.mail;
     if (this.username.length >= 3 && this.mail.includes('@')) {
-      this.isUserValid.emit(this.username);
+      this.takeValidUserToGamePage.emit(this.username);
     } else {
       this.isPersonInfoInvalid = true;
     }
