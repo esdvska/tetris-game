@@ -9,6 +9,8 @@ import { TetrisCoreModule } from 'ngx-tetris';
 import { GameHistoryTableComponent } from './components/game-page/game-history-table/game-history-table.component';
 import { SortPipe } from './shared/model/pipes/sort.pipe';
 import { FilterPipe } from './shared/model/pipes/filter.pipe';
+import { RouterModule } from '@angular/router';
+import { UserFormComponent } from './components/intro-page/user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +20,18 @@ import { FilterPipe } from './shared/model/pipes/filter.pipe';
     GameHistoryTableComponent,
     SortPipe,
     FilterPipe,
+    UserFormComponent,
   ],
-  imports: [BrowserModule, FormsModule, TetrisCoreModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    TetrisCoreModule,
+    RouterModule.forRoot([
+      { path: 'intro', component: IntroPageComponent },
+      { path: 'game', component: GamePageComponent },
+      { path: '**', redirectTo: 'intro' },
+    ]),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

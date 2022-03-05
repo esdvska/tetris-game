@@ -1,0 +1,32 @@
+<form #introForm="ngForm" (ngSubmit)="onSumbit(introForm.form.value)">
+  <input
+    (input)="cleanWarning()"
+    style="width: 100%"
+    class="form-control"
+    type="text"
+    placeholder="user name"
+    ngModel
+    required
+    name="username"
+    minlength="3"
+  />
+  <input
+    (input)="cleanWarning()"
+    style="width: 100%"
+    type="email"
+    class="form-control"
+    placeholder="e-mail"
+    ngModel
+    required
+    name="mail"
+    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+  />
+  <button type="submit" style="width: 100%">START GAME</button>
+  <div
+    class="alert alert-warning"
+    style="width: 100%"
+    *ngIf="!introForm.value.valid || !introForm.value.pristine"
+  >
+    Nazwa użytkownika musi zawierać minimalnie 3 znaki. Email musi zawierać '@'.
+  </div>
+</form>

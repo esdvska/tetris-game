@@ -1,35 +1,17 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserInfoService } from 'src/app/services/user-info.service';
 
 @Component({
   selector: 'app-intro-page',
   templateUrl: './intro-page.component.html',
   styleUrls: ['./intro-page.component.scss'],
 })
-export class IntroPageComponent implements OnInit {
-  @Output() takeValidUserToGamePage = new EventEmitter<string>();
+export class IntroPageComponent {
+  constructor(private _userService: UserInfoService, private _router: Router) {}
 
-  public username: string = '';
-
-  public mail: string = '';
-
-  public isPersonInfoInvalid: boolean = false;
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  public cleanWarning() {
-    this.isPersonInfoInvalid = false;
-  }
-
-  public onSubmit(form: FormGroup) {
-    this.username = form.value.username;
-    this.mail = form.value.mail;
-    if (this.username.length >= 3 && this.mail.includes('@')) {
-      this.takeValidUserToGamePage.emit(this.username);
-    } else {
-      this.isPersonInfoInvalid = true;
-    }
+  public onSubmitForm(userinfo: FormData) {
+    this._userService.setUserInfo(userinfo);
+    this._router.navigate(['/game']);
   }
 }

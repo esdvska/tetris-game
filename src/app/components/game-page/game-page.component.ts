@@ -8,6 +8,8 @@ import {
   ElementRef,
 } from '@angular/core';
 import * as moment from 'moment';
+import { UserInfoService } from 'src/app/services/user-info.service';
+import { Location } from '@angular/common';
 
 import GameHistory from 'src/app/shared/model/gameHistory';
 
@@ -28,7 +30,7 @@ enum GameStates {
 export class GamePageComponent implements OnInit {
   @ViewChild('actionsBtnGroup') actionsBtnGroup: ElementRef | undefined;
 
-  @Input() public username: string = '';
+  public username: string = '';
 
   @Output() public return = new EventEmitter();
 
@@ -46,9 +48,13 @@ export class GamePageComponent implements OnInit {
 
   public selectedAction = GameStates.AllActions;
 
-  constructor() {}
+  constructor(
+    private _userService: UserInfoService,
+    private _location: Location
+  ) {}
 
   ngOnInit(): void {
+    this.username = this._userService.getUserName();
     setInterval(() => {
       if (this.gameStatus === GameStates.Start) {
         ++this.seconds;
@@ -57,7 +63,7 @@ export class GamePageComponent implements OnInit {
   }
 
   public onReturnToHomePage() {
-    this.return.emit();
+    this._location.back();
   }
 
   public onGameStateChange(gameState: GameStates) {

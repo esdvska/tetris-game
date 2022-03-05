@@ -1,5 +1,6 @@
 <div class="dark app-container">
-  <app-intro-page
+  <router-outlet></router-outlet>
+  <!-- <app-intro-page
     (takeValidUserToGamePage)="onTakeValidUSerToGamePage($event)"
     *ngIf="!isUserValid"
   ></app-intro-page>
@@ -7,5 +8,5 @@
     *ngIf="isUserValid"
     [username]="username"
     (return)="onReturn()"
-  ></app-game-page>
+  ></app-game-page> -->
 </div>

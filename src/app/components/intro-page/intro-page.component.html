@@ -1,34 +1,4 @@
 <div class="container row flex-center" style="align-items: center">
   <h1>Welcome to TETRIS WORLD!</h1>
-  <form #introForm="ngForm" (ngSubmit)="onSubmit(introForm.form)">
-    <input
-      (input)="cleanWarning()"
-      style="width: 100%"
-      class="form-control"
-      type="text"
-      placeholder="user name"
-      ngModel
-      required
-      name="username"
-    />
-    <input
-      (input)="cleanWarning()"
-      style="width: 100%"
-      type="email"
-      class="form-control"
-      placeholder="e-mail"
-      ngModel
-      required
-      name="mail"
-    />
-    <button type="submit" style="width: 100%">START GAME</button>
-    <div
-      class="alert alert-warning"
-      style="width: 100%"
-      *ngIf="isPersonInfoInvalid"
-    >
-      Nazwa użytkownika musi zawierać minimalnie 3 znaki. Email musi zawierać
-      '@'.
-    </div>
-  </form>
+  <app-user-form (submitForm)="onSubmitForm($event)"></app-user-form>
 </div>
