@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserInfoService } from 'src/app/services/user-info.service';
+import UserInformations from 'src/app/shared/model/userInfo';
 
 @Component({
   selector: 'app-intro-page',
@@ -10,8 +11,8 @@ import { UserInfoService } from 'src/app/services/user-info.service';
 export class IntroPageComponent {
   constructor(private _userService: UserInfoService, private _router: Router) {}
 
-  public onSubmitForm(userinfo: string) {
-    this._userService.setUserName(userinfo);
+  public onSubmitForm(userinfo: UserInformations) {
+    this._userService.setUserInfo(userinfo);
     this._router.navigate(['/game']);
   }
 }

@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="row flex-center">
+    <div class="sm-6 col">
+      <tetris-core
+        #game
+        (lineCleared)="onLineCleared(); pushLineClearedToHistory()"
+      ></tetris-core>
+    </div>
+    <div class="sm-6 col action-buttons">
+      <button (click)="game.actionStart(); onGameStateChange(gameStates[0])">
+        Start
+      </button>
+      <button (click)="game.actionStop(); onGameStateChange(gameStates[1])">
+        Stop
+      </button>
+      <button (click)="game.actionReset(); onGameStateChange(gameStates[2])">
+        Reset
+      </button>
+      <button (click)="game.actionRotate()">Rotate</button>
+      <button (click)="game.actionLeft()">Left</button>
+      <button (click)="game.actionRight()">Right</button>
+      <button (click)="game.actionDown()">Down</button>
+      <app-game-status
+        [gameStatus]="gameStatus"
+        [seconds]="seconds"
+      ></app-game-status>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="form-group">
+  <label for="scores">Your Scores:</label>
+  <input
+    disabled
+    [value]="points"
+    class="input-block"
+    type="range"
+    name="scores"
+    id="scores"
+    min="0"
+    max="100"
+    oninput="output.value = this.value"
+  />
+  <output id="output" for="scores">{{ points }}</output>
+</div>

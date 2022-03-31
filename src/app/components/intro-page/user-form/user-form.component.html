@@ -1,33 +1,37 @@
-<form [formGroup]="introForm" (ngSubmit)="onSubmit(introForm.value.username)">
+<form [formGroup]="introForm" (ngSubmit)="onSubmit()">
   <input
-    (input)="cleanWarning()"
     style="width: 100%"
     class="form-control"
     type="text"
     placeholder="user name"
-    ngModel
-    required
-    name="username"
-    id="username"
-    minlength="3"
+    formControlName="name"
   />
   <input
-    (input)="cleanWarning()"
     style="width: 100%"
     type="text"
     class="form-control"
     placeholder="token"
-    ngModel
-    required
-    name="mail"
-    minlength="4"
+    formControlName="token"
   />
-  <button type="submit" style="width: 100%">START GAME</button>
+  <button type="submit" style="width: 100%" [disabled]="introForm.invalid">
+    START GAME
+  </button>
   <div
     class="alert alert-warning"
     style="width: 100%"
-    *ngIf="!introForm.value.valid || !introForm.value.pristine"
+    *ngIf="
+      introForm.controls['name'].invalid && introForm.controls['name'].dirty
+    "
   >
-    Nazwa użytkownika musi zawierać minimalnie 3 znaki. Wprowadź swój token.
+    Nazwa użytkownika musi zawierać minimalnie 3 znaki.
+  </div>
+  <div
+    class="alert alert-warning"
+    style="width: 100%"
+    *ngIf="
+      introForm.controls['token'].invalid && introForm.controls['token'].dirty
+    "
+  >
+    Wprowadź 4-cyfrowy token.
   </div>
 </form>

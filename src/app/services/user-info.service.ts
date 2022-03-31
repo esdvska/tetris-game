@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-
+import UserInformations from '../shared/model/userInfo';
 @Injectable({
   providedIn: 'root',
 })
 export class UserInfoService {
-  private _userName: string = '';
+  private _userInfo: UserInformations = { name: '', token: 0o0 };
   constructor() {}
 
-  public setUserName(name: string) {
-    this._userName = name;
+  public setUserInfo(user: UserInformations) {
+    this._userInfo = { name: user.name, token: user.token };
   }
 
-  public getUserName() {
-    return this._userName;
+  public getUserInfo() {
+    return this._userInfo;
   }
 }

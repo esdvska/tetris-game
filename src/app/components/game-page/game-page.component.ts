@@ -12,6 +12,7 @@ import { UserInfoService } from 'src/app/services/user-info.service';
 import { Location } from '@angular/common';
 
 import GameHistory from 'src/app/shared/model/gameHistory';
+import UserInformations from 'src/app/shared/model/userInfo';
 
 enum GameStates {
   Start = 'Started',
@@ -30,7 +31,7 @@ enum GameStates {
 export class GamePageComponent implements OnInit {
   @ViewChild('actionsBtnGroup') actionsBtnGroup: ElementRef | undefined;
 
-  public username: string = '';
+  public userInfo: UserInformations = { name: '', token: 0o0 };
 
   @Output() public return = new EventEmitter();
 
@@ -54,7 +55,7 @@ export class GamePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.username = this._userService.getUserName();
+    this.userInfo = this._userService.getUserInfo();
     setInterval(() => {
       if (this.gameStatus === GameStates.Start) {
         ++this.seconds;

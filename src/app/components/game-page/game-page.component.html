@@ -1,97 +1,19 @@
 <div class="game-card">
   <div class="row flex-center">
     <div class="sm-6 md-8 lg-8 col">
-      <h3>{{ "Hello " + username }}</h3>
+      <h3>{{ "Hello " + userInfo.name }}</h3>
     </div>
     <div class="sm-6 md-4 lg-4 col" style="margin: auto">
-      <label class="paper-btn btn-secondary" for="modal-1"
-        >Open My Game History</label
-      >
-      <input class="modal-state" id="modal-1" type="checkbox" />
-      <div class="modal">
-        <label class="modal-bg" for="modal-1"></label>
-        <div class="modal-body">
-          <label class="btn-close" for="modal-1">X</label>
-          <h4 class="modal-title">Game History</h4>
-          <h5 class="modal-subtitle">Sort</h5>
-          <select [(ngModel)]="selectedAction">
-            <option
-              *ngFor="let action of gameStates"
-              [value]="action"
-              [selected]="true"
-              style="color: black"
-            >
-              {{ action !== "Ready" ? action : null }}
-            </option>
-          </select>
-          <p class="modal-text">
-            <app-game-history-table
-              [history]="gameHistory"
-              [selectedAction]="selectedAction"
-            ></app-game-history-table>
-          </p>
-          <button class="btn-success">
-            <label for="modal-1">Nice!</label>
-          </button>
-        </div>
-      </div>
+      <app-game-history
+        [selectedAction]="selectedAction"
+        [gameStates]="gameStates"
+        [gameHistory]="gameHistory"
+      ></app-game-history>
       <button class="btn-secondary" (click)="onReturnToHomePage()">
         Exit game
       </button>
     </div>
   </div>
-  <div class="form-group">
-    <label for="scores">Your Scores:</label>
-    <input
-      disabled
-      [value]="points"
-      class="input-block"
-      type="range"
-      name="scores"
-      id="scores"
-      min="0"
-      max="100"
-      oninput="output.value = this.value"
-    />
-    <output id="output" for="scores">{{ points }}</output>
-  </div>
-  <div class="card">
-    <div class="row flex-center">
-      <div class="sm-6 col">
-        <tetris-core
-          #game
-          (lineCleared)="onLineCleared(); pushLineClearedToHistory()"
-        ></tetris-core>
-      </div>
-      <div class="sm-6 col action-buttons">
-        <button (click)="game.actionStart(); onGameStateChange(gameStates[0])">
-          Start
-        </button>
-        <button (click)="game.actionStop(); onGameStateChange(gameStates[1])">
-          Stop
-        </button>
-        <button (click)="game.actionReset(); onGameStateChange(gameStates[2])">
-          Reset
-        </button>
-        <button (click)="game.actionRotate()">Rotate</button>
-        <button (click)="game.actionLeft()">Left</button>
-        <button (click)="game.actionRight()">Right</button>
-        <button (click)="game.actionDown()">Down</button>
-        <div class="row flex-center">
-          <div class="sm-6 col">
-            <h4>{{ "Game " + gameStatus }}</h4>
-          </div>
-          <div class="sm-6 col text-center m-auto">
-            <div class="paper-switch-tile-card border">
-              <div
-                class="paper-switch-tile-card-front border background-secondary"
-              >
-                {{ seconds + " sec" }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-game-scores [points]="points"></app-game-scores>
+  <app-game-actions></app-game-actions>
 </div>

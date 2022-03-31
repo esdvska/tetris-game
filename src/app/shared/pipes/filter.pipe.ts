@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import GameHistory from '../gameHistory';
+import GameHistory from '../model/gameHistory';
 
 @Pipe({
   name: 'filter',
