@@ -10,8 +10,8 @@ import { UserInfoService } from 'src/app/services/user-info.service';
 export class IntroPageComponent {
   constructor(private _userService: UserInfoService, private _router: Router) {}
 
-  public onSubmitForm(userinfo: FormData) {
-    this._userService.setUserInfo(userinfo);
+  public onSubmitForm(userinfo: string) {
+    this._userService.setUserName(userinfo);
     this._router.navigate(['/game']);
   }
 }

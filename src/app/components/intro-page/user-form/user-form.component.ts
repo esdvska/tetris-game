@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserInfoService } from 'src/app/services/user-info.service';
+import { Validators } from '@angular/forms';
 
 interface UserInfo {
   name: string;
@@ -13,14 +14,23 @@ interface UserInfo {
   styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
-  @Output() public submitForm = new EventEmitter<UserInfo>();
+  @Output() public submitForm = new EventEmitter<string>();
   public username: string = '';
 
   public mail: string = '';
 
   public isPersonInfoInvalid: boolean = false;
 
-  constructor() {}
+  public introForm = this._fb.group({
+    username: ['', Validators.required],
+    token: [null, Validators.required],
+  });
+
+  constructor(
+    private _userService: UserInfoService,
+    private _router: Router,
+    private _fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {}
 
@@ -29,13 +39,10 @@ export class UserFormComponent implements OnInit {
   }
 
   public onSubmit(form: FormGroup) {
-    submitForm.emit() = form.value.username;
-    this.mail = form.value.mail;
-    if (this.username.length >= 3 && this.mail.includes('@')) {
-      this._userService.setUserName(this.username);
-      this._router.navigate(['/game']);
-    } else {
-      this.isPersonInfoInvalid = true;
-    }
+    console.log(form.value.username);
+    // this.submitForm.emit(form.value.username);
+
+    // this._userService.setUserName(this.username);
+    // this._router.navigate(['/game']);
   }
 }
