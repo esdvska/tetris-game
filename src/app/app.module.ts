@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { IntroPageComponent } from './components/intro-page/intro-page.component';
 import { GamePageComponent } from './components/game-page/game-page.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TetrisCoreModule } from 'ngx-tetris';
 import { GameHistoryTableComponent } from './components/game-page/game-history/game-history-table/game-history-table.component';
 import { SortPipe } from './shared/pipes/sort.pipe';
@@ -36,6 +37,7 @@ import { GameActionsComponent } from './components/game-page/game-actions/game-a
     ReactiveFormsModule,
     TetrisCoreModule,
     AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

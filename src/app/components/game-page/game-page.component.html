@@ -15,5 +15,12 @@
     </div>
   </div>
   <app-game-scores [points]="points"></app-game-scores>
-  <app-game-actions></app-game-actions>
+  <app-game-actions
+    (lineCleared)="(onLineCleared)"
+    (pushLineClearedToHistory)="(pushLineClearedToHistory)"
+    (gameStateChange)="(onGameStateChange)"
+    [gameStatus]="gameStatus"
+    [gameStates]="gameStates"
+    [seconds]="seconds"
+  ></app-game-actions>
 </div>

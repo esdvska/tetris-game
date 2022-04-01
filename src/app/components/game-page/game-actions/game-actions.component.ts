@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-game-actions',
@@ -6,7 +6,13 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./game-actions.component.scss'],
 })
 export class GameActionsComponent implements OnInit {
-  @Output() public onLineCleared = new EventEmitter<any>();
+  @Input() public gameStates: any;
+  @Input() public gameStatus: any;
+  @Input() public seconds: any;
+  @Output() public lineCleared = new EventEmitter();
+  @Output() public pushLineClearedToHistory = new EventEmitter();
+  @Output() public gameStateChange = new EventEmitter();
+
   constructor() {}
 
   ngOnInit(): void {}
