@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class TetrisService {
-  private tetrisUrl = 'http://scores.chrum.it/tetris';
   constructor(private http: HttpClient) {}
 
-  public getScores() {
-    return this.http.get(this.tetrisUrl);
+  private getScores() {
+    const options = {
+      headers: new HttpHeaders({
+        Accept: 'application/json',
+      }),
+    };
+    return this.http.get(`${environment.gameUrl}tetris`, options);
+  }
+
+  private checkToken(token: number) {
+    this.http.post(environment.gameUrl, { 'auth-token': token });
   }
 }
