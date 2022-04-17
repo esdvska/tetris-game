@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 export class TetrisService {
   constructor(private http: HttpClient) {}
 
-  private getScores() {
+  public getScores() {
     const options = {
       headers: new HttpHeaders({
         Accept: 'application/json',
@@ -15,7 +15,11 @@ export class TetrisService {
     return this.http.get(`${environment.gameUrl}tetris`, options);
   }
 
-  private checkToken(token: number) {
+  public checkToken(token: number) {
     this.http.post(environment.gameUrl, { 'auth-token': token });
+  }
+
+  public postScores(data: PostScoresRequest) {
+    this.http.post(`${environment.gameUrl}scores`, data);
   }
 }

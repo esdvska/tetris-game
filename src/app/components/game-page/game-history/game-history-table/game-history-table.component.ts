@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import GameHistory from 'src/app/shared/model/gameHistory';
+import GameHistory from 'src/app/shared/models/game-history';
 
 @Component({
   selector: 'app-game-history-table',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserInfoService } from 'src/app/services/user-info.service';
-import UserInformations from 'src/app/shared/model/userInfo';
+import UserInformations from 'src/app/shared/models/user-info';
 
 @Component({
   selector: 'app-intro-page',

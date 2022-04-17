@@ -11,8 +11,8 @@ import * as moment from 'moment';
 import { UserInfoService } from 'src/app/services/user-info.service';
 import { Location } from '@angular/common';
 
-import GameHistory from 'src/app/shared/model/gameHistory';
-import UserInformations from 'src/app/shared/model/userInfo';
+import GameHistory from 'src/app/shared/models/game-history';
+import UserInformations from 'src/app/shared/models/user-info';
 import { TetrisService } from 'src/app/api/tetris-api.service';
 
 enum GameStates {
