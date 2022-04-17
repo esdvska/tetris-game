@@ -16,7 +16,7 @@ import { GameScoresComponent } from './components/game-page/game-scores/game-sco
 import { GameHistoryComponent } from './components/game-page/game-history/game-history.component';
 import { GameStatusComponent } from './components/game-page/game-status/game-status.component';
 import { GameActionsComponent } from './components/game-page/game-actions/game-actions.component';
-import { TetrisService } from './api/tetris-api.service';
+import { TetrisApiService } from './api/tetris-api.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { TetrisService } from './api/tetris-api.service';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [TetrisService],
+  providers: [TetrisApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -13,7 +13,7 @@ import { Location } from '@angular/common';
 
 import GameHistory from 'src/app/shared/models/game-history';
 import UserInformations from 'src/app/shared/models/user-info';
-import { TetrisService } from 'src/app/api/tetris-api.service';
+import { TetrisApiService } from 'src/app/api/tetris-api.service';
 
 enum GameStates {
   Start = 'Started',
@@ -53,12 +53,11 @@ export class GamePageComponent implements OnInit {
   constructor(
     private _userService: UserInfoService,
     private _location: Location,
-    private _tetrisService: TetrisService
+    private _tetrisService: TetrisApiService
   ) {}
 
   ngOnInit(): void {
     this.userInfo = this._userService.getUserInfo();
-    this._tetrisService.getScores().subscribe((data) => console.log(data));
     setInterval(() => {
       if (this.gameStatus === GameStates.Start) {
         ++this.seconds;

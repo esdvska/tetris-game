@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import PostScoresRequest from '../shared/models/post-scores-request';
+import { CheckTokenResponse } from '../shared/models/check-token-response';
 
 @Injectable()
-export class TetrisService {
+export class TetrisApiService {
   constructor(private http: HttpClient) {}
 
   public getScores() {
@@ -16,10 +18,18 @@ export class TetrisService {
   }
 
   public checkToken(token: number) {
-    this.http.post(environment.gameUrl, { 'auth-token': token });
+    return this.http.post<CheckTokenResponse>(
+      `${environment.gameUrl}check-token`,
+      {
+        'auth-token': token,
+      }
+    );
   }
 
   public postScores(data: PostScoresRequest) {
-    this.http.post(`${environment.gameUrl}scores`, data);
+    return this.http.post(`${environment.gameUrl}scores`, {
+      ...data,
+      game: 'tetris',
+    });
   }
 }

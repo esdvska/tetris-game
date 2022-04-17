@@ -13,7 +13,7 @@ import UserInformations from 'src/app/shared/models/user-info';
 export class UserFormComponent implements OnInit {
   @Output() public submitForm = new EventEmitter<UserInformations>();
 
-  public username: string = '';
+  public username!: string;
 
   public userToken!: number;
 
@@ -30,11 +30,7 @@ export class UserFormComponent implements OnInit {
     ]),
   });
 
-  constructor(
-    private _userService: UserInfoService,
-    private _router: Router,
-    private _fb: FormBuilder
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {}
 

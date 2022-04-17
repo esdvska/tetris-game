@@ -1,5 +1,4 @@
 export default interface PostScoresRequest {
-  name: 'string';
-  game: 'tetris';
-  score: 0;
+  name: string;
+  score: number;
 }

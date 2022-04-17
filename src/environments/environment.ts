@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  gameUrl: 'http://scores.chrum.it/scores/',
+  gameUrl: 'http://scores.chrum.it/',
 };
 
 /*
