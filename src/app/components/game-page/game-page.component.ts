@@ -14,6 +14,8 @@ import { Location } from '@angular/common';
 import GameHistory from 'src/app/shared/models/game-history';
 import UserInformations from 'src/app/shared/models/user-info';
 import { TetrisApiService } from 'src/app/api/tetris-api.service';
+import { take, tap } from 'rxjs/operators';
+import { GameStatusService } from 'src/app/services/game-status.service';
 
 enum GameStates {
   Start = 'Started',
@@ -53,7 +55,8 @@ export class GamePageComponent implements OnInit {
   constructor(
     private _userService: UserInfoService,
     private _location: Location,
-    private _tetrisService: TetrisApiService
+    private _tetrisService: TetrisApiService,
+    private _gameStatusService: GameStatusService
   ) {}
 
   ngOnInit(): void {
@@ -74,7 +77,18 @@ export class GamePageComponent implements OnInit {
       timestamp: moment(new Date()),
       actionType: gameState,
     });
+
     if (gameState === GameStates.Reset) {
+      this._tetrisService
+        .postScores({
+          name: this.userInfo.name,
+          score: this.points,
+        })
+        .pipe(
+          tap((data) => console.log(data)),
+          take(1)
+        )
+        .subscribe();
       if (
         this.gameStatus === GameStates.Start ||
         this.gameStatus === GameStates.Reset
@@ -82,12 +96,27 @@ export class GamePageComponent implements OnInit {
         this.gameStatus = GameStates.Start;
       } else {
         this.gameStatus = GameStates.Ready;
-        this.points = 0;
+        this._gameStatusService.resetPoints();
       }
     } else {
       this.gameStatus = gameState;
     }
   }
+
+  public onGameEnd() {
+    console.log('henlo');
+    // this._tetrisService
+    //   .postScores({
+    //     name: this.userInfo.name,
+    //     score: this.points,
+    //   })
+    //   .pipe(
+    //     tap((data) => console.log(data)),
+    //     take(1)
+    //   )
+    //   .subscribe();
+  }
+
   pushLineClearedToHistory() {
     this.gameHistory.push({
       timestamp: moment(),

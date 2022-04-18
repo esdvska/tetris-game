@@ -13,7 +13,13 @@
       <button (click)="game.actionStop(); gameStateChange.emit(gameStates[1])">
         Stop
       </button>
-      <button (click)="game.actionReset(); gameStateChange.emit(gameStates[2])">
+      <button
+        (click)="
+          game.actionReset();
+          gameStateChange.emit(gameStates[2]);
+          endGame.emit()
+        "
+      >
         Reset
       </button>
       <button (click)="game.actionRotate()">Rotate</button>

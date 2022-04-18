@@ -6,14 +6,19 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./game-actions.component.scss'],
 })
 export class GameActionsComponent implements OnInit {
-  @Input() public gameStates: any;
-  @Input() public gameStatus: any;
+  @Input() public gameStates!: string[];
+  @Input() set gameStatus(value: string) {
+    this.gameStatusFromInput = value;
+  }
   @Input() public seconds: any;
   @Output() public lineCleared = new EventEmitter();
   @Output() public pushLineClearedToHistory = new EventEmitter();
   @Output() public gameStateChange = new EventEmitter();
-
+  @Output() public endGame = new EventEmitter();
+  public gameStatusFromInput!: string;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.gameStates);
+  }
 }

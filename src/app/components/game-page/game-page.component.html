@@ -17,8 +17,9 @@
   <app-game-scores [points]="points"></app-game-scores>
   <app-game-actions
     (lineCleared)="(onLineCleared)"
-    (pushLineClearedToHistory)="(pushLineClearedToHistory)"
-    (gameStateChange)="(onGameStateChange)"
+    (pushLineClearedToHistory)="pushLineClearedToHistory()"
+    (gameStateChange)="onGameStateChange($event)"
+    (endGame)="onGameEnd()"
     [gameStatus]="gameStatus"
     [gameStates]="gameStates"
     [seconds]="seconds"
