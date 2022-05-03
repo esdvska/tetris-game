@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserInfoService } from 'src/app/services/user-info.service';
 import { Validators } from '@angular/forms';
-import UserInformations from 'src/app/shared/models/user-info';
+import UserInformations from 'src/app/shared/models/interfaces/user-info';
 
 @Component({
   selector: 'app-user-form',

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import PostScoresRequest from '../shared/models/post-scores-request';
-import { CheckTokenResponse } from '../shared/models/check-token-response';
+import PostScoresRequest from '../shared/models/interfaces/post-scores-request';
+import { CheckTokenResponse } from '../shared/models/interfaces/check-token-response';
 
 @Injectable()
 export class TetrisApiService {

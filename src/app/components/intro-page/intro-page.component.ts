@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
 import { TetrisApiService } from 'src/app/api/tetris-api.service';
 import { UserInfoService } from 'src/app/services/user-info.service';
-import UserInformations from 'src/app/shared/models/user-info';
+import UserInformations from 'src/app/shared/models/interfaces/user-info';
 
 @Component({
   selector: 'app-intro-page',

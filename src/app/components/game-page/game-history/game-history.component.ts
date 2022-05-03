@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { GameStates } from 'src/app/shared/models/enums/game-states';
 
 @Component({
   selector: 'app-game-history',
@@ -8,9 +9,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class GameHistoryComponent implements OnInit {
   @Input() selectedAction = '';
 
-  @Input() public gameStates: any;
-
   @Input() public gameHistory: any;
+  public gameStates = Object.values(GameStates);
+
   constructor() {}
 
   ngOnInit(): void {}
