@@ -1,30 +1,22 @@
 import {
   Component,
   OnInit,
-  Input,
   Output,
   EventEmitter,
   ViewChild,
   ElementRef,
 } from '@angular/core';
+
 import * as moment from 'moment';
-import { UserInfoService } from 'src/app/services/user-info.service';
 import { Location } from '@angular/common';
-
-import GameHistory from 'src/app/shared/models/game-history';
-import UserInformations from 'src/app/shared/models/user-info';
-import { TetrisApiService } from 'src/app/api/tetris-api.service';
 import { take, tap } from 'rxjs/operators';
-import { GameStatusService } from 'src/app/services/game-status.service';
 
-enum GameStates {
-  Start = 'Started',
-  Stop = 'Stopped',
-  Reset = 'Reset',
-  Clear = 'Cleared',
-  AllActions = 'All',
-  Ready = 'Ready',
-}
+import GameHistory from 'src/app/shared/models/interfaces/game-history';
+import UserInformations from 'src/app/shared/models/interfaces/user-info';
+import { TetrisApiService } from 'src/app/api/tetris-api.service';
+import { GameStatusService } from 'src/app/services/game-status.service';
+import { UserInfoService } from 'src/app/services/user-info.service';
+import { GameStates } from 'src/app/shared/models/enums/game-states';
 
 @Component({
   selector: 'app-game-page',
@@ -34,21 +26,19 @@ enum GameStates {
 export class GamePageComponent implements OnInit {
   @ViewChild('actionsBtnGroup') actionsBtnGroup: ElementRef | undefined;
 
-  public userInfo: UserInformations = { name: '', token: 0o0 };
-
   @Output() public return = new EventEmitter();
+
+  public userInfo: UserInformations = { name: '', token: 0o0 };
 
   public gameHistory: GameHistory[] = [];
 
-  public gameStates = Object.values(GameStates);
+  public gameStatus = this._gameStatusService.gameStatus;
 
-  public gameStatus = GameStates.Ready;
-
-  public points: number = 0;
+  public points!: number;
 
   public seconds: number = 0;
 
-  public isEndGameModalVisible: boolean = false;
+  public isEndGameModalVisible = false;
 
   public selectedAction = GameStates.AllActions;
 
@@ -60,12 +50,14 @@ export class GamePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.points = this._gameStatusService.points;
     this.userInfo = this._userService.getUserInfo();
     setInterval(() => {
       if (this.gameStatus === GameStates.Start) {
         ++this.seconds;
       }
     }, 1000);
+    console.log(this.gameStatus);
   }
 
   public onReturnToHomePage() {
@@ -79,27 +71,27 @@ export class GamePageComponent implements OnInit {
     });
 
     if (gameState === GameStates.Reset) {
-      this._tetrisService
-        .postScores({
-          name: this.userInfo.name,
-          score: this.points,
-        })
-        .pipe(
-          tap((data) => console.log(data)),
-          take(1)
-        )
-        .subscribe();
+      // this._tetrisService
+      //   .postScores({
+      //     name: this.userInfo.name,
+      //     score: this.points,
+      //   })
+      //   .pipe(
+      //     tap((data) => console.log(data)),
+      //     take(1)
+      //   )
+      //   .subscribe();
       if (
         this.gameStatus === GameStates.Start ||
         this.gameStatus === GameStates.Reset
       ) {
-        this.gameStatus = GameStates.Start;
+        this._gameStatusService.changeGameStatus(GameStates.Start);
       } else {
-        this.gameStatus = GameStates.Ready;
+        this._gameStatusService.changeGameStatus(GameStates.Ready);
         this._gameStatusService.resetPoints();
       }
     } else {
-      this.gameStatus = gameState;
+      this._gameStatusService.changeGameStatus(gameState);
     }
   }
 
@@ -126,5 +118,6 @@ export class GamePageComponent implements OnInit {
 
   public onLineCleared() {
     ++this.points;
+    this.pushLineClearedToHistory();
   }
 }

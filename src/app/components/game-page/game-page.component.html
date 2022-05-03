@@ -6,7 +6,6 @@
     <div class="sm-6 md-4 lg-4 col" style="margin: auto">
       <app-game-history
         [selectedAction]="selectedAction"
-        [gameStates]="gameStates"
         [gameHistory]="gameHistory"
       ></app-game-history>
       <button class="btn-secondary" (click)="onReturnToHomePage()">
@@ -14,14 +13,14 @@
       </button>
     </div>
   </div>
+
   <app-game-scores [points]="points"></app-game-scores>
+
   <app-game-actions
-    (lineCleared)="(onLineCleared)"
-    (pushLineClearedToHistory)="pushLineClearedToHistory()"
+    (lineCleared)="onLineCleared()"
     (gameStateChange)="onGameStateChange($event)"
     (endGame)="onGameEnd()"
     [gameStatus]="gameStatus"
-    [gameStates]="gameStates"
     [seconds]="seconds"
   ></app-game-actions>
 </div>

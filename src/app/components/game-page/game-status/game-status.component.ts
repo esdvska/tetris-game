@@ -1,4 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { GameStatusService } from 'src/app/services/game-status.service';
+import { GameStates } from 'src/app/shared/models/enums/game-states';
 
 @Component({
   selector: 'app-game-status',
@@ -6,10 +9,13 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./game-status.component.scss'],
 })
 export class GameStatusComponent implements OnInit {
-  @Input() gameStatus: any;
+  public gameStatus$!: Observable<GameStates>;
+
   @Input() seconds: any;
 
-  constructor() {}
+  constructor(private _gameStatusService: GameStatusService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.gameStatus$ = this._gameStatusService.gameStatus$;
+  }
 }
