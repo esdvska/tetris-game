@@ -17,6 +17,8 @@ import { GameHistoryComponent } from './components/game-page/game-history/game-h
 import { GameStatusComponent } from './components/game-page/game-status/game-status.component';
 import { GameActionsComponent } from './components/game-page/game-actions/game-actions.component';
 import { TetrisApiService } from './api/tetris-api.service';
+import { HighScoresComponent } from './components/game-page/high-scores/high-scores.component';
+import { HighScoresTableComponent } from './components/game-page/high-scores/high-scores-table/high-scores-table.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { TetrisApiService } from './api/tetris-api.service';
     GameHistoryComponent,
     GameStatusComponent,
     GameActionsComponent,
+    HighScoresComponent,
+    HighScoresTableComponent,
   ],
   imports: [
     BrowserModule,

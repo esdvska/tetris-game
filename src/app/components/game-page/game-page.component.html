@@ -4,6 +4,7 @@
       <h3>{{ "Hello " + userInfo.name }}</h3>
     </div>
     <div class="sm-6 md-4 lg-4 col" style="margin: auto">
+      <app-high-scores></app-high-scores>
       <app-game-history
         [selectedAction]="selectedAction"
         [gameHistory]="gameHistory"
@@ -14,7 +15,7 @@
     </div>
   </div>
 
-  <app-game-scores [points]="points"></app-game-scores>
+  <app-game-scores [points]="points$ | async"></app-game-scores>
 
   <app-game-actions
     (lineCleared)="onLineCleared()"
