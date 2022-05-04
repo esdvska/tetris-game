@@ -17,13 +17,15 @@ import { TetrisApiService } from 'src/app/api/tetris-api.service';
 import { GameStatusService } from 'src/app/services/game-status.service';
 import { UserInfoService } from 'src/app/services/user-info.service';
 import { GameStates } from 'src/app/shared/models/enums/game-states';
+import { interval, Observable } from 'rxjs';
+import { BaseComponent } from '../base.component';
 
 @Component({
   selector: 'app-game-page',
   templateUrl: './game-page.component.html',
   styleUrls: ['./game-page.component.scss'],
 })
-export class GamePageComponent implements OnInit {
+export class GamePageComponent extends BaseComponent implements OnInit {
   @ViewChild('actionsBtnGroup') actionsBtnGroup: ElementRef | undefined;
 
   @Output() public return = new EventEmitter();
@@ -32,9 +34,9 @@ export class GamePageComponent implements OnInit {
 
   public gameHistory: GameHistory[] = [];
 
-  public gameStatus = this._gameStatusService.gameStatus;
+  public gameStatus!: string;
 
-  public points!: number;
+  public points$!: Observable<number>;
 
   public seconds: number = 0;
 
@@ -47,17 +49,24 @@ export class GamePageComponent implements OnInit {
     private _location: Location,
     private _tetrisService: TetrisApiService,
     private _gameStatusService: GameStatusService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.points = this._gameStatusService.points;
+    this.subscriptions.push(
+      this._gameStatusService.gameStatus$.subscribe(
+        (data) => this.gameStatus === data
+      )
+    );
+    this.points$ = this._gameStatusService.points$;
     this.userInfo = this._userService.getUserInfo();
+
     setInterval(() => {
       if (this.gameStatus === GameStates.Start) {
         ++this.seconds;
       }
     }, 1000);
-    console.log(this.gameStatus);
   }
 
   public onReturnToHomePage() {
@@ -71,16 +80,16 @@ export class GamePageComponent implements OnInit {
     });
 
     if (gameState === GameStates.Reset) {
-      // this._tetrisService
-      //   .postScores({
-      //     name: this.userInfo.name,
-      //     score: this.points,
-      //   })
-      //   .pipe(
-      //     tap((data) => console.log(data)),
-      //     take(1)
-      //   )
-      //   .subscribe();
+      this._tetrisService
+        .postScores({
+          name: this.userInfo.name,
+          score: this._gameStatusService.pointsValue,
+        })
+        .pipe(
+          tap((data) => console.log(data)),
+          take(1)
+        )
+        .subscribe();
       if (
         this.gameStatus === GameStates.Start ||
         this.gameStatus === GameStates.Reset
@@ -117,7 +126,7 @@ export class GamePageComponent implements OnInit {
   }
 
   public onLineCleared() {
-    ++this.points;
+    this._gameStatusService.changePoints();
     this.pushLineClearedToHistory();
   }
 }

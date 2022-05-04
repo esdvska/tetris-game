@@ -9,7 +9,7 @@ import { GameStates } from 'src/app/shared/models/enums/game-states';
   styleUrls: ['./game-status.component.scss'],
 })
 export class GameStatusComponent implements OnInit {
-  public gameStatus$!: Observable<GameStates>;
+  public gameStatus$!: Observable<string>;
 
   @Input() seconds: any;
 
