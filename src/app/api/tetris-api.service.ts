@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import PostScoresRequest from '../shared/models/interfaces/post-scores-request';
 import { CheckTokenResponse } from '../shared/models/interfaces/check-token-response';
+import { GetScoresRequest } from '../shared/models/dto/get-scores-request';
 
 @Injectable()
 export class TetrisApiService {
@@ -13,7 +14,10 @@ export class TetrisApiService {
     }),
   };
   public getScores() {
-    return this.http.get(`${environment.gameUrl}tetris`, this.options);
+    return this.http.get<GetScoresRequest[]>(
+      `${environment.gameUrl}tetris`,
+      this.options
+    );
   }
 
   public checkToken(token: number) {
