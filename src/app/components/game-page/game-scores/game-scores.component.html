@@ -2,7 +2,7 @@
   <label for="scores">Your Scores:</label>
   <input
     disabled
-    [value]="points"
+    [value]="pointsFromInput"
     class="input-block"
     type="range"
     name="scores"
@@ -11,5 +11,5 @@
     max="100"
     oninput="output.value = this.value"
   />
-  <output id="output" for="scores">{{ points }}</output>
+  <output id="output" for="scores">{{ pointsFromInput }}</output>
 </div>

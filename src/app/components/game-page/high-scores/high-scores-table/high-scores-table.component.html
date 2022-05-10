@@ -1,17 +1,17 @@
 <table class="table-hover">
-  <!-- <thead>
-      <tr>
-        <th>Action</th>
-        <th>
-          Date
-          <i class="bi bi-arrow-down" (click)="dir = 'asc'"></i>
-          <i class="bi bi-arrow-up" (click)="dir = 'desc'"></i>
-        </th>
-      </tr>
-    </thead> -->
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>
+        Scores
+        <i class="bi bi-arrow-down" (click)="dir = 'asc'"></i>
+        <i class="bi bi-arrow-up" (click)="dir = 'desc'"></i>
+      </th>
+    </tr>
+  </thead>
   <tbody>
-    <tr *ngFor="let score of highScores">
-      <td>Game {{ score.name }}</td>
+    <tr *ngFor="let score of highScores | sortScores: dir">
+      <td>{{ score.name }}</td>
       <td>{{ score.score }}</td>
     </tr>
   </tbody>

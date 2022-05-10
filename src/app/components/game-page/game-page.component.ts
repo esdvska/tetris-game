@@ -36,7 +36,7 @@ export class GamePageComponent extends BaseComponent implements OnInit {
 
   public gameStatus!: string;
 
-  public points$!: Observable<number>;
+  public points!: number;
 
   public seconds: number = 0;
 
@@ -59,7 +59,7 @@ export class GamePageComponent extends BaseComponent implements OnInit {
         (data) => this.gameStatus === data
       )
     );
-    this.points$ = this._gameStatusService.points$;
+    this.points = this._gameStatusService.pointsValue;
     this.userInfo = this._userService.getUserInfo();
 
     setInterval(() => {
@@ -105,17 +105,16 @@ export class GamePageComponent extends BaseComponent implements OnInit {
   }
 
   public onGameEnd() {
-    console.log('henlo');
-    // this._tetrisService
-    //   .postScores({
-    //     name: this.userInfo.name,
-    //     score: this.points,
-    //   })
-    //   .pipe(
-    //     tap((data) => console.log(data)),
-    //     take(1)
-    //   )
-    //   .subscribe();
+    this._tetrisService
+      .postScores({
+        name: this.userInfo.name,
+        score: this.points,
+      })
+      .pipe(
+        tap((data) => console.log(data)),
+        take(1)
+      )
+      .subscribe();
   }
 
   pushLineClearedToHistory() {

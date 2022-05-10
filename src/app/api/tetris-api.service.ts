@@ -4,10 +4,14 @@ import { environment } from 'src/environments/environment';
 import PostScoresRequest from '../shared/models/interfaces/post-scores-request';
 import { CheckTokenResponse } from '../shared/models/interfaces/check-token-response';
 import { GetScoresRequest } from '../shared/models/dto/get-scores-request';
+import { UserInfoService } from '../services/user-info.service';
 
 @Injectable()
 export class TetrisApiService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private userInfoService: UserInfoService
+  ) {}
   private options = {
     headers: new HttpHeaders({
       Accept: 'application/json',
@@ -31,9 +35,24 @@ export class TetrisApiService {
   }
 
   public postScores(data: PostScoresRequest) {
-    return this.http.post(`${environment.gameUrl}scores`, {
-      ...data,
-      game: 'tetris',
+    // let options = {
+    //   headers: new HttpHeaders({
+    //     'auth-token': this.userInfoService.getUserInfo().token.toString(),
+    //   }),
+    // };
+    const headers = new HttpHeaders({
+      'auth-token': '1234',
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     });
+    const options = { headers };
+    return this.http.post(
+      `${environment.gameUrl}scores`,
+      {
+        ...data,
+        game: 'tetris',
+      },
+      options
+    );
   }
 }

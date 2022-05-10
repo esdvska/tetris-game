@@ -6,7 +6,10 @@ import { Component, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./game-scores.component.scss'],
 })
 export class GameScoresComponent implements OnInit {
-  @Input() public points: number | null = 0;
+  public pointsFromInput!: number;
+  @Input() set points(value: number) {
+    this.pointsFromInput = value;
+  }
   constructor() {}
 
   ngOnInit(): void {}
