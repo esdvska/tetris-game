@@ -14,4 +14,12 @@ export class UserInfoService {
   public getUserInfo() {
     return this._userInfo;
   }
+
+  public getUserToken() {
+    return this._userInfo.token;
+  }
+
+  public getUserName() {
+    return this._userInfo.name;
+  }
 }

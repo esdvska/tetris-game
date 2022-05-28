@@ -41,7 +41,7 @@ export class TetrisApiService {
     //   }),
     // };
     const headers = new HttpHeaders({
-      'auth-token': '1234',
+      'auth-token': this.userInfoService.getUserToken().toString(),
       Accept: 'application/json',
       'Content-Type': 'application/json',
     });

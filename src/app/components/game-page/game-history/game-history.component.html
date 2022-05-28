@@ -1,11 +1,11 @@
-<label class="paper-btn btn-secondary" for="modal-1"
+<label class="paper-btn btn-secondary" for="game-history"
   >Open My Game History</label
 >
-<input class="modal-state" id="modal-1" type="checkbox" />
+<input class="modal-state" id="game-history" type="checkbox" />
 <div class="modal">
-  <label class="modal-bg" for="modal-1"></label>
+  <label class="modal-bg" for="game-history"></label>
   <div class="modal-body">
-    <label class="btn-close" for="modal-1">X</label>
+    <label class="btn-close" for="game-history">X</label>
     <h4 class="modal-title">Game History</h4>
     <h5 class="modal-subtitle">Sort</h5>
     <select [(ngModel)]="selectedAction">
@@ -25,7 +25,7 @@
       ></app-game-history-table>
     </p>
     <button class="btn-success">
-      <label for="modal-1">Nice!</label>
+      <label for="game-history">Nice!</label>
     </button>
   </div>
 </div>

@@ -1,26 +1,15 @@
-<label class="paper-btn btn-secondary" for="modal-1">High Scores</label>
-<input class="modal-state" id="modal-1" type="checkbox" />
+<label class="paper-btn btn-secondary" for="high-scores">High Scores</label>
+<input class="modal-state" id="high-scores" type="checkbox" />
 <div class="modal">
-  <label class="modal-bg" for="modal-1"></label>
+  <label class="modal-bg" for="high-scores"></label>
   <div class="modal-body">
-    <label class="btn-close" for="modal-1">X</label>
+    <label class="btn-close" for="high-scores">X</label>
     <h4 class="modal-title">Game History</h4>
-    <!-- <h5 class="modal-subtitle">Sort</h5>
-    <select [(ngModel)]="selectedAction">
-      <option
-        *ngFor="let action of gameStates"
-        [value]="action"
-        [selected]="true"
-        style="color: black"
-      >
-        {{ action !== "Ready" ? action : null }}
-      </option>
-    </select> -->
     <p class="modal-text">
       <app-high-scores-table [highScores]="highScores"></app-high-scores-table>
     </p>
     <button class="btn-success">
-      <label for="modal-1">Nice!</label>
+      <label for="high-scores">Nice!</label>
     </button>
   </div>
 </div>

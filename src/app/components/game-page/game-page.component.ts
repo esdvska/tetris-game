@@ -79,11 +79,12 @@ export class GamePageComponent extends BaseComponent implements OnInit {
       actionType: gameState,
     });
 
+    console.log(this.gameHistory);
     if (gameState === GameStates.Reset) {
       this._tetrisService
         .postScores({
           name: this.userInfo.name,
-          score: this._gameStatusService.pointsValue,
+          score: 100000,
         })
         .pipe(
           tap((data) => console.log(data)),
@@ -108,7 +109,7 @@ export class GamePageComponent extends BaseComponent implements OnInit {
     this._tetrisService
       .postScores({
         name: this.userInfo.name,
-        score: this.points,
+        score: 10000,
       })
       .pipe(
         tap((data) => console.log(data)),

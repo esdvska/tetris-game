@@ -20,6 +20,8 @@ import { TetrisApiService } from './api/tetris-api.service';
 import { HighScoresComponent } from './components/game-page/high-scores/high-scores.component';
 import { HighScoresTableComponent } from './components/game-page/high-scores/high-scores-table/high-scores-table.component';
 import { SortScoresPipe } from './shared/pipes/sort-scores.pipe';
+import { MyScoresComponent } from './components/game-page/my-scores/my-scores.component';
+import { MyScoresTableComponent } from './components/game-page/my-scores/my-scores-table/my-scores-table.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { SortScoresPipe } from './shared/pipes/sort-scores.pipe';
     HighScoresComponent,
     HighScoresTableComponent,
     SortScoresPipe,
+    MyScoresComponent,
+    MyScoresTableComponent,
   ],
   imports: [
     BrowserModule,

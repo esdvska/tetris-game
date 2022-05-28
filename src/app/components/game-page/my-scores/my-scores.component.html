@@ -1,0 +1,15 @@
+<label class="paper-btn btn-secondary" for="my-scores">My Scores</label>
+<input class="modal-state" id="my-scores" type="checkbox" />
+<div class="modal">
+  <label class="modal-bg" for="my-scores"></label>
+  <div class="modal-body">
+    <label class="btn-close" for="my-scores">X</label>
+    <h4 class="modal-title">My Scores</h4>
+    <p class="modal-text">
+      <app-my-scores-table [myScores]="myScores"></app-my-scores-table>
+    </p>
+    <button class="btn-success">
+      <label for="my-scores">Nice!</label>
+    </button>
+  </div>
+</div>
