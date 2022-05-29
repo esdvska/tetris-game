@@ -9,6 +9,7 @@ import { GameStates } from 'src/app/shared/models/enums/game-states';
   styleUrls: ['./game-actions.component.scss'],
 })
 export class GameActionsComponent implements OnInit {
+  public myScoresVisible = true;
   @Input() set gameStatus(value: string) {
     this.gameStatusFromInput = value;
   }

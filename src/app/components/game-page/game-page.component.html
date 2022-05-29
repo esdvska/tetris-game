@@ -1,9 +1,9 @@
 <div class="game-card">
   <div class="row flex-center">
-    <div class="sm-6 md-8 lg-8 col">
-      <h3>{{ "Hello " + userInfo.name }}</h3>
+    <div class="col-6">
+      <h4>{{ "Hello " + userInfo.name }}</h4>
     </div>
-    <div class="sm-6 md-4 lg-4 col" style="margin: auto">
+    <div class="col-6" style="margin: auto">
       <app-high-scores></app-high-scores>
       <app-game-history
         [selectedAction]="selectedAction"
