@@ -1,6 +1,10 @@
-<div class="row">
+<div class="row flex-center">
   <div class="col-3">
-    <tetris-core #game (lineCleared)="onLineCleared()"></tetris-core>
+    <tetris-core
+      class="black-and-white"
+      #game
+      (lineCleared)="onLineCleared()"
+    ></tetris-core>
   </div>
   <div class="col-2 action-buttons">
     <div><button (click)="onStartGame()">Start</button></div>
@@ -11,35 +15,5 @@
     <div><button (click)="game.actionRight()">Right</button></div>
     <div><button (click)="game.actionDown()">Down</button></div>
     <app-game-status [seconds]="seconds"></app-game-status>
-  </div>
-  <div class="card col-7">
-    <div class="row flex-spaces tabs">
-      <input id="my" type="radio" name="tabs" checked  (click)="myScoresVisible = true"/>
-      <label for="my">My Scores</label>
-      <input id="high" type="radio" name="tabs" (click)="myScoresVisible = false"/>
-      <label for="high">High Scores</label>
-
-  
-        <!-- <table class="table-hover">
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>
-                Scores
-                <i class="bi bi-arrow-down" (click)="dir = 'asc'"></i>
-                <i class="bi bi-arrow-up" (click)="dir = 'desc'"></i>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let score of highScores | sortScores: dir">
-              <td>{{ score.name }}</td>
-              <td>{{ score.score }}</td>
-            </tr>
-          </tbody>
-        </table> -->
-        <p>table</p>
-      </div>
-    </div>
   </div>
 </div>

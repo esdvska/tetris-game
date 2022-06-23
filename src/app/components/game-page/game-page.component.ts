@@ -56,10 +56,10 @@ export class GamePageComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptions.push(
       this._gameStatusService.gameStatus$.subscribe(
-        (data) => this.gameStatus === data
-      )
+        (data) => (this.gameStatus = data)
+      ),
+      this._gameStatusService.points$.subscribe((data) => (this.points = data))
     );
-    this.points = this._gameStatusService.pointsValue;
     this.userInfo = this._userService.getUserInfo();
 
     setInterval(() => {
@@ -79,12 +79,12 @@ export class GamePageComponent extends BaseComponent implements OnInit {
       actionType: gameState,
     });
 
-    console.log(this.gameHistory);
     if (gameState === GameStates.Reset) {
+      console.log(this.points + 'punkty na wycodzne');
       this._tetrisService
         .postScores({
           name: this.userInfo.name,
-          score: 100000,
+          score: this.points,
         })
         .pipe(
           tap((data) => console.log(data)),

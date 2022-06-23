@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { GameStates } from '../shared/models/enums/game-states';
 
 @Injectable({
@@ -12,7 +12,6 @@ export class GameStatusService {
   public points$ = this.points.asObservable();
   public gameStatus$ = this.gameStatus.asObservable();
 
-  public pointsValue = this.points.value;
   constructor() {}
 
   public resetPoints() {
@@ -20,8 +19,7 @@ export class GameStatusService {
   }
 
   public changePoints() {
-    // let currentpoints = this.points.value;
-    this.points.next(this.pointsValue + 1);
+    this.points.next(this.points.getValue() + 1);
   }
 
   public changeGameStatus(newStatus: string) {

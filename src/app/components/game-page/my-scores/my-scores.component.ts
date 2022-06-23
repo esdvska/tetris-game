@@ -21,6 +21,16 @@ export class MyScoresComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscriptions.push(
+      this.tetrisApiService
+        .getScores()
+        .pipe(
+          map((data) => {
+            this.myScores = data.filter(
+              (score) => score.name === this.userInfoService.getUserName()
+            );
+          })
+        )
+        .subscribe(),
       interval(30000)
         .pipe(
           mergeMap(() =>

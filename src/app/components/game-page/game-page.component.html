@@ -1,16 +1,16 @@
 <div class="game-card">
   <div class="row flex-center">
-    <div class="col-6">
+    <div class="col-5">
       <h4>{{ "Hello " + userInfo.name }}</h4>
     </div>
-    <div class="col-6" style="margin: auto">
+    <div class="col-7" style="margin: auto">
       <app-high-scores></app-high-scores>
       <app-game-history
         [selectedAction]="selectedAction"
         [gameHistory]="gameHistory"
       ></app-game-history>
       <app-my-scores></app-my-scores>
-      <button class="btn-secondary" (click)="onReturnToHomePage()">
+      <button class="btn-danger" (click)="onReturnToHomePage()">
         Exit game
       </button>
     </div>
@@ -19,6 +19,7 @@
   <app-game-scores [points]="points"></app-game-scores>
 
   <app-game-actions
+    class="justify-content-center"
     (lineCleared)="onLineCleared()"
     (gameStateChange)="onGameStateChange($event)"
     (endGame)="onGameEnd()"

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map, tap } from 'rxjs';
+import { interval, map, tap, switchMap } from 'rxjs';
 import { TetrisApiService } from 'src/app/api/tetris-api.service';
 import { GetScoresRequest } from 'src/app/shared/models/dto/get-scores-request';
 import { BaseComponent } from '../../base.component';
@@ -17,6 +17,7 @@ export class HighScoresComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscriptions.push(
+      //pierwsze odpalenie requestu o high scores
       this.tetrisApiService
         .getScores()
         .pipe(
@@ -25,6 +26,21 @@ export class HighScoresComponent extends BaseComponent implements OnInit {
               .sort((a, b) => b.score - a.score)
               .slice(0, 10);
           })
+        )
+        .subscribe(),
+
+      //interwał z pobieraniem high scores
+      interval(30000)
+        .pipe(
+          switchMap(() =>
+            this.tetrisApiService.getScores().pipe(
+              map((data) => {
+                this.highScores = data
+                  .sort((a, b) => b.score - a.score)
+                  .slice(0, 10);
+              })
+            )
+          )
         )
         .subscribe()
     );

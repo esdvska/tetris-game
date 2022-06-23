@@ -7,7 +7,7 @@ import { GetScoresRequest } from 'src/app/shared/models/dto/get-scores-request';
   styleUrls: ['./high-scores-table.component.scss'],
 })
 export class HighScoresTableComponent implements OnInit {
-  @Input() highScores!: GetScoresRequest[];
+  @Input() highScores: GetScoresRequest[] = [];
   public dir = 'asc';
 
   constructor() {}

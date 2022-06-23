@@ -6,9 +6,11 @@ import { GetScoresRequest } from '../models/dto/get-scores-request';
 })
 export class SortScoresPipe implements PipeTransform {
   transform(value: GetScoresRequest[], dir: string): GetScoresRequest[] {
-    if (dir === 'desc') {
-      return value.sort((a, b) => (b.score > a.score ? 1 : -1));
-    }
-    return value.sort((a, b) => (a.score > b.score ? 1 : -1));
+    if (value) {
+      if (dir === 'desc') {
+        return value.sort((a, b) => (b.score > a.score ? 1 : -1));
+      }
+      return value.sort((a, b) => (a.score > b.score ? 1 : -1));
+    } else return [];
   }
 }
