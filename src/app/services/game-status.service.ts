@@ -24,6 +24,5 @@ export class GameStatusService {
 
   public changeGameStatus(newStatus: string) {
     this.gameStatus.next(newStatus);
-    // console.log(this.gameStatus);
   }
 }

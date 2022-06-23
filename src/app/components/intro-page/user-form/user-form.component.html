@@ -1,4 +1,4 @@
-<form [formGroup]="introForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="introForm">
   <input
     style="width: 100%"
     class="form-control"
@@ -12,10 +12,26 @@
     class="form-control"
     placeholder="token"
     formControlName="token"
+    (blur)="onInputBlur()"
   />
-  <button type="submit" style="width: 100%" [disabled]="introForm.invalid">
-    START GAME
-  </button>
+  <div class="row flex-center">
+    <button
+      type="submit"
+      [disabled]="introForm.invalid"
+      (click)="onSubmit(gameModes.High)"
+    >
+      High Contrast
+    </button>
+    <p class="margin-large">START GAME</p>
+    <button
+      type="submit"
+      (click)="onSubmit(gameModes.Normal)"
+      [disabled]="introForm.invalid"
+    >
+      Normal Mode
+    </button>
+  </div>
+
   <div
     class="alert alert-warning"
     style="width: 100%"

@@ -18,7 +18,9 @@ import { GameStatusService } from 'src/app/services/game-status.service';
 import { UserInfoService } from 'src/app/services/user-info.service';
 import { GameStates } from 'src/app/shared/models/enums/game-states';
 import { interval, Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { BaseComponent } from '../base.component';
+import { GameModes } from 'src/app/shared/models/enums/game-modes';
 
 @Component({
   selector: 'app-game-page',
@@ -44,13 +46,17 @@ export class GamePageComponent extends BaseComponent implements OnInit {
 
   public selectedAction = GameStates.AllActions;
 
+  public color!: GameModes;
+
   constructor(
     private _userService: UserInfoService,
     private _location: Location,
     private _tetrisService: TetrisApiService,
-    private _gameStatusService: GameStatusService
+    private _gameStatusService: GameStatusService,
+    private _route: ActivatedRoute
   ) {
     super();
+    this.color = this._route.snapshot.params['colors'];
   }
 
   ngOnInit(): void {
@@ -70,6 +76,7 @@ export class GamePageComponent extends BaseComponent implements OnInit {
   }
 
   public onReturnToHomePage() {
+    this._userService.clearData();
     this._location.back();
   }
 
@@ -80,17 +87,15 @@ export class GamePageComponent extends BaseComponent implements OnInit {
     });
 
     if (gameState === GameStates.Reset) {
-      console.log(this.points + 'punkty na wycodzne');
-      this._tetrisService
-        .postScores({
-          name: this.userInfo.name,
-          score: this.points,
-        })
-        .pipe(
-          tap((data) => console.log(data)),
-          take(1)
-        )
-        .subscribe();
+      if (this.points) {
+        this._tetrisService
+          .postScores({
+            name: this.userInfo.name,
+            score: this.points,
+          })
+          .pipe(take(1))
+          .subscribe();
+      }
       if (
         this.gameStatus === GameStates.Start ||
         this.gameStatus === GameStates.Reset
@@ -103,19 +108,6 @@ export class GamePageComponent extends BaseComponent implements OnInit {
     } else {
       this._gameStatusService.changeGameStatus(gameState);
     }
-  }
-
-  public onGameEnd() {
-    this._tetrisService
-      .postScores({
-        name: this.userInfo.name,
-        score: 10000,
-      })
-      .pipe(
-        tap((data) => console.log(data)),
-        take(1)
-      )
-      .subscribe();
   }
 
   pushLineClearedToHistory() {

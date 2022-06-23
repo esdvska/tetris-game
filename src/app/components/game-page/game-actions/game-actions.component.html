@@ -1,6 +1,7 @@
 <div class="row flex-center">
   <div class="col-3">
     <tetris-core
+      [class.black-and-white]="color === gameModes.High"
       class="black-and-white"
       #game
       (lineCleared)="onLineCleared()"

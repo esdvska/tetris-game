@@ -35,11 +35,6 @@ export class TetrisApiService {
   }
 
   public postScores(data: PostScoresRequest) {
-    // let options = {
-    //   headers: new HttpHeaders({
-    //     'auth-token': this.userInfoService.getUserInfo().token.toString(),
-    //   }),
-    // };
     const headers = new HttpHeaders({
       'auth-token': this.userInfoService.getUserToken().toString(),
       Accept: 'application/json',

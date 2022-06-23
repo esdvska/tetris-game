@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { TetrisCoreComponent } from 'ngx-tetris';
+import { GameModes } from 'src/app/shared/models/enums/game-modes';
 import { GameStates } from 'src/app/shared/models/enums/game-states';
 
 @Component({
@@ -10,10 +11,12 @@ import { GameStates } from 'src/app/shared/models/enums/game-states';
 })
 export class GameActionsComponent implements OnInit {
   public myScoresVisible = true;
+  public gameModes = GameModes;
   @Input() set gameStatus(value: string) {
     this.gameStatusFromInput = value;
   }
   @Input() public seconds: any;
+  @Input() public color!: GameModes;
   @Output() public lineCleared = new EventEmitter();
   @Output() public pushLineClearedToHistory = new EventEmitter();
   @Output() public gameStateChange = new EventEmitter();

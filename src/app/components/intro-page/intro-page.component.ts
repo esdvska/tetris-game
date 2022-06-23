@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
 import { TetrisApiService } from 'src/app/api/tetris-api.service';
 import { UserInfoService } from 'src/app/services/user-info.service';
+import { GameModes } from 'src/app/shared/models/enums/game-modes';
 import UserInformations from 'src/app/shared/models/interfaces/user-info';
 
 @Component({
@@ -17,14 +18,20 @@ export class IntroPageComponent {
     private _tetrisApi: TetrisApiService
   ) {}
 
-  public onSubmitForm(userinfo: UserInformations) {
+  public onSetUserInfo(value: UserInformations) {
+    this._userService.setUserInfo(value);
+  }
+  public onSubmitForm(value: {
+    userinfo: UserInformations;
+    colors: GameModes;
+  }) {
     this._tetrisApi
-      .checkToken(userinfo.token)
+      .checkToken(value.userinfo.token)
       .pipe(
         tap((data) => {
           if (data.success) {
-            this._userService.setUserInfo(userinfo);
-            this._router.navigate(['/game']);
+            this._userService.setUserInfo(value.userinfo);
+            this._router.navigate(['/game/', value.colors]);
           } else {
             alert('Wrong Token');
           }

@@ -1,4 +1,7 @@
 <div class="container row flex-center" style="align-items: center">
   <h1>Welcome to TETRIS WORLD!</h1>
-  <app-user-form (submitForm)="onSubmitForm($event)"></app-user-form>
+  <app-user-form
+    (submitForm)="onSubmitForm($event)"
+    (setUserInfo)="onSetUserInfo($event)"
+  ></app-user-form>
 </div>

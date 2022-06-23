@@ -25,9 +25,11 @@ export class MyScoresComponent extends BaseComponent implements OnInit {
         .getScores()
         .pipe(
           map((data) => {
-            this.myScores = data.filter(
-              (score) => score.name === this.userInfoService.getUserName()
-            );
+            this.myScores = data
+              .filter(
+                (score) => score.name === this.userInfoService.getUserName()
+              )
+              .slice(0, 10);
           })
         )
         .subscribe(),
