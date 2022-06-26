@@ -33,14 +33,17 @@ export class MyScoresComponent extends BaseComponent implements OnInit {
           })
         )
         .subscribe(),
+
       interval(30000)
         .pipe(
           mergeMap(() =>
             this.tetrisApiService.getScores().pipe(
               map((data) => {
-                this.myScores = data.filter(
-                  (score) => score.name === this.userInfoService.getUserName()
-                );
+                this.myScores = data
+                  .filter(
+                    (score) => score.name === this.userInfoService.getUserName()
+                  )
+                  .slice(0, 10);
               })
             )
           )
